@@ -32,7 +32,7 @@ public class Employee extends User{
     private Set<DayOfWeek> daysAvailable = new HashSet<>();
 
     @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
-    private List<Schedule> schedules= new ArrayList<>();
+    private List<Schedule> empSchedules= new ArrayList<>();
 
     public void setSkillSet(EmployeeSkill skill){
         this.skillSet.add(skill);

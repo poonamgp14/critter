@@ -31,7 +31,7 @@ public class Pet {
     private String notes;
 
     @OneToMany(mappedBy = "pet",cascade = CascadeType.ALL)
-    private List<Schedule> schedules= new ArrayList<>();
+    private List<Schedule> petSchedules= new ArrayList<>();
 
     public PetType getType() { return type;}
     public void setType(PetType type) { this.type =type;}
