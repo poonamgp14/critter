@@ -20,10 +20,44 @@
 //    private String name;
 //
 //    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "owner_id", nullable = false)
-//    private Customer owner;
+////    https://vladmihalcea.com/the-best-way-to-map-a-onetomany-association-with-jpa-and-hibernate/
+////    @Column(name="owner")
+//    private Customer customer;
 //    private LocalDate birthDate;
 //
 //    @Nationalized
 //    private String notes;
+//
+//    public PetType getType() { return type;}
+//    public void setType(PetType type) { this.type =type;}
+//
+//    public Long getId(){ return id;}
+//
+//    public void setId(Long id){ this.id = id; }
+//
+//    public String getName() { return name;}
+//    public void setName(String name) { this.name = name;}
+//
+//    public Customer getCustomer() { return customer; }
+//
+//    public void setCustomer(Customer customer) { this.customer= customer;}
+//
+//    public LocalDate getBirthDate(){ return birthDate;}
+//
+//    public void setBirthDate(LocalDate birthDate){ this.birthDate = birthDate;}
+//
+////    @Override
+////    public boolean equals(Object o) {
+////        if (this == o)
+////            return true;
+////
+////        if (!(o instanceof Pet))
+////            return false;
+////
+////        return id != null && id.equals(((Pet) o).getId());
+////    }
+////    @Override
+////    public int hashCode() {
+////        return getClass().hashCode();
+////    }
 //}

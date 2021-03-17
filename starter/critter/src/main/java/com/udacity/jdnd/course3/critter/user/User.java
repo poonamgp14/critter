@@ -5,21 +5,21 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
-public abstract class User {
+public class User {
 //	@Id
 //	@GeneratedValue
 //	private Long id;
 
 	@EmbeddedId
-	private UserPK userId;
+	private UserPK id;
 
 	@Column(name = "address_full", length = 500)
 	private String address;
 
 
-	public UserPK getId(){ return userId;}
+	public UserPK getId(){ return id;}
 
-	public void setId(UserPK id){ this.userId = id; }
+	public void setId(UserPK id){ this.id = id; }
 
 
 	public String getAddress() {

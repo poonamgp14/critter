@@ -19,7 +19,15 @@ public class UserPK implements Serializable {
         this.contact = contact;
     }
 
-    private UserPK(){}
+    public UserPK(){}
+
+    public String getName(){
+        return name;
+    }
+
+    public String getContact(){
+        return contact;
+    }
 
     @Override
     public boolean equals(Object o) {

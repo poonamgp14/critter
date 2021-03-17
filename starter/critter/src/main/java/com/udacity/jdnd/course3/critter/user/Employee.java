@@ -29,4 +29,20 @@ public class Employee extends User{
 
 //    @OneToOne(mappedBy = "employee")
 //    Schedule schedule;
+
+    public void setSkillSet(EmployeeSkill skill){
+        this.skillSet.add(skill);
+    }
+
+    public Set<EmployeeSkill> getSkillSet(){
+        return skillSet;
+    }
+
+    public void setDaysAvailable(DayOfWeek day){
+        this.daysAvailable.add(day);
+    }
+
+    public Set<DayOfWeek> getDaysAvailable(){
+        return daysAvailable;
+    }
 }
