@@ -8,18 +8,19 @@ import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+@Entity
 public class Schedule {
     @Id
 	@GeneratedValue
 	private Long scheduleId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Employee employeeId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Pet petId;
+    @ManyToMany
+    private List<Employee> employees;
+    @ManyToMany
+    private List<Pet> pets;
 
     private LocalDateTime deliveryTime;
     @ElementCollection(targetClass = EmployeeSkill.class)

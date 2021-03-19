@@ -30,9 +30,6 @@ public class Pet {
     @Nationalized
     private String notes;
 
-    @OneToMany(mappedBy = "pet",cascade = CascadeType.ALL)
-    private List<Schedule> petSchedules= new ArrayList<>();
-
     public PetType getType() { return type;}
     public void setType(PetType type) { this.type =type;}
 

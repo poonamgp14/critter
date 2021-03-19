@@ -12,6 +12,8 @@ public class EmployeeDTO {
     private String name;
     private Set<EmployeeSkill> skills;
     private Set<DayOfWeek> daysAvailable;
+    private String contact;
+    private String address;
 
     public long getId() {
         return id;

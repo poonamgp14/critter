@@ -1,5 +1,8 @@
 package com.udacity.jdnd.course3.critter.user;
 
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.BeanFactoryUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.DayOfWeek;
@@ -15,6 +18,9 @@ import java.util.Set;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+    @Autowired
+    EmployeeService employeeService;
 
     @PostMapping("/customer")
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO){
@@ -33,12 +39,15 @@ public class UserController {
 
     @PostMapping("/employee")
     public EmployeeDTO saveEmployee(@RequestBody EmployeeDTO employeeDTO) {
-        throw new UnsupportedOperationException();
+        employeeService.save(convertEmployeeDTOToEmployee(employeeDTO));
+        return employeeDTO;
+//        throw new UnsupportedOperationException();
     }
 
     @PostMapping("/employee/{employeeId}")
     public EmployeeDTO getEmployee(@PathVariable long employeeId) {
-        throw new UnsupportedOperationException();
+        return convertEmployeeToEmployeeDTO(employeeService.getEmployeeById(employeeId));
+//        throw new UnsupportedOperationException();
     }
 
     @PutMapping("/employee/{employeeId}")
@@ -49,6 +58,18 @@ public class UserController {
     @GetMapping("/employee/availability")
     public List<EmployeeDTO> findEmployeesForService(@RequestBody EmployeeRequestDTO employeeDTO) {
         throw new UnsupportedOperationException();
+    }
+
+    private EmployeeDTO convertEmployeeToEmployeeDTO(Employee employee){
+        EmployeeDTO employeeDTO = new EmployeeDTO();
+        BeanUtils.copyProperties(employee, employeeDTO);
+        return employeeDTO;
+    }
+
+    private Employee convertEmployeeDTOToEmployee(EmployeeDTO employeeDTO){
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDTO, employee);
+        return employee;
     }
 
 }

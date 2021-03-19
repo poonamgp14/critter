@@ -29,10 +29,8 @@ public class Employee extends User{
             joinColumns = @JoinColumn(name = "id")
     )
     @Column(name = "dayId")
-    private Set<DayOfWeek> daysAvailable = new HashSet<>();
+    private Set<EmployeeDaysAvailable> daysAvailable = new HashSet<>();
 
-    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
-    private List<Schedule> empSchedules= new ArrayList<>();
 
     public void setSkillSet(EmployeeSkill skill){
         this.skillSet.add(skill);
@@ -42,11 +40,11 @@ public class Employee extends User{
         return skillSet;
     }
 
-    public void setDaysAvailable(DayOfWeek day){
+    public void setDaysAvailable(EmployeeDaysAvailable day){
         this.daysAvailable.add(day);
     }
 
-    public Set<DayOfWeek> getDaysAvailable(){
+    public Set<EmployeeDaysAvailable> getDaysAvailable(){
         return daysAvailable;
     }
 }
