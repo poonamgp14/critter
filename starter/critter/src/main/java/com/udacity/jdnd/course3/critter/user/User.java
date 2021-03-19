@@ -42,7 +42,7 @@ public class User {
 		return address;
 	}
 
-	public void setAddress(String name) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 

@@ -46,4 +46,10 @@ public class EmployeeDTO {
     public void setDaysAvailable(Set<DayOfWeek> daysAvailable) {
         this.daysAvailable = daysAvailable;
     }
+
+    public String getContact(){ return contact;}
+    public void setContact(String contact){ this.contact = contact;}
+
+    public String getAddress(){ return address;}
+    public void setAddress(String address){ this.address = address;}
 }

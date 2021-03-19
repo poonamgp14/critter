@@ -39,20 +39,21 @@ public class UserController {
 
     @PostMapping("/employee")
     public EmployeeDTO saveEmployee(@RequestBody EmployeeDTO employeeDTO) {
-        employeeService.save(convertEmployeeDTOToEmployee(employeeDTO));
-        return employeeDTO;
-//        throw new UnsupportedOperationException();
+         Long id = employeeService.save(convertEmployeeDTOToEmployee(employeeDTO));
+         employeeDTO.setId(id);
+         return employeeDTO;
     }
 
     @PostMapping("/employee/{employeeId}")
     public EmployeeDTO getEmployee(@PathVariable long employeeId) {
         return convertEmployeeToEmployeeDTO(employeeService.getEmployeeById(employeeId));
-//        throw new UnsupportedOperationException();
     }
 
     @PutMapping("/employee/{employeeId}")
     public void setAvailability(@RequestBody Set<DayOfWeek> daysAvailable, @PathVariable long employeeId) {
-        throw new UnsupportedOperationException();
+        System.out.println("-----------------------------------------------");
+        System.out.println(daysAvailable);
+        employeeService.setAvailability(daysAvailable, employeeId);
     }
 
     @GetMapping("/employee/availability")

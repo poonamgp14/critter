@@ -5,9 +5,7 @@ import com.udacity.jdnd.course3.critter.schedule.Schedule;
 
 import javax.persistence.*;
 import java.time.DayOfWeek;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -20,31 +18,31 @@ public class Employee extends User{
             joinColumns = @JoinColumn(name = "id")
     )
     @Column(name = "skillId")
-    private final Set<EmployeeSkill> skillSet= new HashSet<>();
+    private Set<EmployeeSkill> skills= new HashSet<>();
 
-    @ElementCollection(targetClass = EmployeeDaysAvailable.class)
+    @ElementCollection(targetClass = DayOfWeek.class)
     @Enumerated(EnumType.STRING)
     @CollectionTable(
             name = "EmployeeDaysAvailableTable",
             joinColumns = @JoinColumn(name = "id")
     )
     @Column(name = "dayId")
-    private Set<EmployeeDaysAvailable> daysAvailable = new HashSet<>();
+    private Set<DayOfWeek> daysAvailable = new HashSet<>();
 
 
-    public void setSkillSet(EmployeeSkill skill){
-        this.skillSet.add(skill);
+    public void setSkills(Set<EmployeeSkill> skill){
+        this.skills = skill;
     }
 
-    public Set<EmployeeSkill> getSkillSet(){
-        return skillSet;
+    public Set<EmployeeSkill> getSkills(){
+        return skills;
     }
 
-    public void setDaysAvailable(EmployeeDaysAvailable day){
-        this.daysAvailable.add(day);
+    public void setDaysAvailable(Set<DayOfWeek> day){
+        this.daysAvailable = day;
     }
 
-    public Set<EmployeeDaysAvailable> getDaysAvailable(){
+    public Set<DayOfWeek> getDaysAvailable(){
         return daysAvailable;
     }
 }
