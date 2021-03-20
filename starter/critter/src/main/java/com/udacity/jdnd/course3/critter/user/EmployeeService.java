@@ -23,7 +23,9 @@ public class EmployeeService {
     public void setAvailability(Set<DayOfWeek> daysAvailable, Long employeeId){
         System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%-----------------------------------------------");
         System.out.println(daysAvailable);
-        employeeRepository.updateEmployeeSetAvailability(daysAvailable, employeeId);
+        System.out.println(employeeRepository.getOne(employeeId));
+//        employeeRepository.updateEmployeeSetAvailability(daysAvailable, employeeId);
+        employeeRepository.getOne(employeeId).setDaysAvailable(daysAvailable);
     }
 }
 

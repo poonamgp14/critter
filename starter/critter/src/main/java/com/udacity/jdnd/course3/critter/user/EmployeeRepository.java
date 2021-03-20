@@ -20,6 +20,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     @Modifying
     @Query("update Employee e set e.daysAvailable= :daysAvailable where e.id= :employeeId")
-    void updateEmployeeSetAvailability(@Param("daysAvailable") Set<DayOfWeek> daysAvailable, @Param("employeeId") Long employeeId);
+    void updateEmployeeSetAvailability(Set<DayOfWeek> daysAvailable, Long employeeId);
 
 }
