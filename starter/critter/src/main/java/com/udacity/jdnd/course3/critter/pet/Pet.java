@@ -22,7 +22,7 @@ public class Pet {
     @Nationalized
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 //    https://vladmihalcea.com/the-best-way-to-map-a-onetomany-association-with-jpa-and-hibernate/
     private Customer customer;
     private LocalDate birthDate;

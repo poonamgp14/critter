@@ -22,6 +22,7 @@ public class UserController {
 
     @Autowired
     EmployeeService employeeService;
+    @Autowired
     CustomerService customerService;
 
     @PostMapping("/customer")
@@ -39,6 +40,7 @@ public class UserController {
 
     @GetMapping("/customer/pet/{petId}")
     public CustomerDTO getOwnerByPet(@PathVariable long petId){
+
         throw new UnsupportedOperationException();
     }
 
@@ -56,8 +58,6 @@ public class UserController {
 
     @PutMapping("/employee/{employeeId}")
     public void setAvailability(@RequestBody Set<DayOfWeek> daysAvailable, @PathVariable long employeeId) {
-        System.out.println("-----------------------------------------------");
-        System.out.println(daysAvailable);
         employeeService.setAvailability(daysAvailable, employeeId);
     }
 
