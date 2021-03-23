@@ -22,8 +22,9 @@ public class Pet {
     @Nationalized
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
 //    https://vladmihalcea.com/the-best-way-to-map-a-onetomany-association-with-jpa-and-hibernate/
+    @JoinColumn(name="ownerId", nullable=false)
     private Customer customer;
     private LocalDate birthDate;
 
@@ -42,7 +43,7 @@ public class Pet {
 
     public Customer getCustomer() { return customer; }
 
-    public void setCustomer(Customer customer) { this.customer= customer;}
+    public void setCustomer(Customer customer) { this.customer = customer;}
 
     public LocalDate getBirthDate(){ return birthDate;}
 

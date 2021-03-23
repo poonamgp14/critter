@@ -18,8 +18,8 @@ public class Customer extends User{
     private List<Pet> pets= new ArrayList<>();
 
     public void addPet(Pet pet) {
-        pets.add(pet);
         pet.setCustomer(this);
+        pets.add(pet);
     }
 
     public void removePet(Pet pet) {
