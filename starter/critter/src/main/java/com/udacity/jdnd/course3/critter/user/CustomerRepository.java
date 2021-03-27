@@ -23,6 +23,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     Customer findCustomerByPets(Long id);
 
+
 //    List<Pet> pets = entityManager.createQuery(
 //            "select pc " +
 //                    "from PostComment pc " +

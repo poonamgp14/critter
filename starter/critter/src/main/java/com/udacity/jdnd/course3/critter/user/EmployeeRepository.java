@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.time.DayOfWeek;
+import java.util.List;
 import java.util.Set;
 
 @Repository
@@ -22,4 +23,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Query("update Employee e set e.daysAvailable= :daysAvailable where e.id= :employeeId")
     void updateEmployeeSetAvailability(Set<DayOfWeek> daysAvailable, Long employeeId);
 
+    List<Employee> findByIdIn(List<Long> employeeIds);
+
+    List<Employee> findEmployeesBySkillsIn(Set<EmployeeSkill> skills);
 }

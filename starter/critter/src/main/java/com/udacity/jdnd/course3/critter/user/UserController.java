@@ -1,5 +1,7 @@
 package com.udacity.jdnd.course3.critter.user;
 
+import com.udacity.jdnd.course3.critter.pet.Pet;
+import com.udacity.jdnd.course3.critter.pet.PetService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class UserController {
     EmployeeService employeeService;
     @Autowired
     CustomerService customerService;
+    @Autowired
+    PetService petService;
 
     @PostMapping("/customer")
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO){
@@ -40,8 +44,8 @@ public class UserController {
 
     @GetMapping("/customer/pet/{petId}")
     public CustomerDTO getOwnerByPet(@PathVariable long petId){
-
-        throw new UnsupportedOperationException();
+        Pet pet = petService.getPetById(petId);
+        return convertCustomerToCustomerDTO(pet.getCustomer());
     }
 
     @PostMapping("/employee")
@@ -63,7 +67,9 @@ public class UserController {
 
     @GetMapping("/employee/availability")
     public List<EmployeeDTO> findEmployeesForService(@RequestBody EmployeeRequestDTO employeeDTO) {
-        throw new UnsupportedOperationException();
+        Set<EmployeeSkill> skills = employeeDTO.getSkills();
+        List<Employee> employees = employeeService.getEmployeesForService(skills);
+        return employees.stream().map(e -> convertEmployeeToEmployeeDTO(e)).collect(Collectors.toList());
     }
 
     private EmployeeDTO convertEmployeeToEmployeeDTO(Employee employee){

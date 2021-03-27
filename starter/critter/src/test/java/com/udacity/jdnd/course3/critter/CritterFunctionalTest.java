@@ -188,7 +188,7 @@ public class CritterFunctionalTest {
         ScheduleDTO scheduleDTO = scheduleController.getAllSchedules().get(0);
 
         Assertions.assertEquals(scheduleDTO.getActivities(), skillSet);
-        Assertions.assertEquals(scheduleDTO.getDate(), date);
+        Assertions.assertEquals(scheduleDTO.getDeliveryTime(), date);
         Assertions.assertEquals(scheduleDTO.getEmployeeIds(), employeeList);
         Assertions.assertEquals(scheduleDTO.getPetIds(), petList);
     }
@@ -203,7 +203,7 @@ public class CritterFunctionalTest {
         sched3.setEmployeeIds(sched1.getEmployeeIds());
         sched3.setPetIds(sched2.getPetIds());
         sched3.setActivities(Sets.newHashSet(EmployeeSkill.SHAVING, EmployeeSkill.PETTING));
-        sched3.setDate(LocalDate.of(2020, 3, 23));
+        sched3.setDeliveryTime(LocalDate.of(2020, 3, 23));
         scheduleController.createSchedule(sched3);
 
         /*
@@ -272,7 +272,7 @@ public class CritterFunctionalTest {
         ScheduleDTO scheduleDTO = new ScheduleDTO();
         scheduleDTO.setPetIds(petIds);
         scheduleDTO.setEmployeeIds(employeeIds);
-        scheduleDTO.setDate(date);
+        scheduleDTO.setDeliveryTime(date);
         scheduleDTO.setActivities(activities);
         return scheduleDTO;
     }
@@ -299,7 +299,7 @@ public class CritterFunctionalTest {
         Assertions.assertEquals(sched1.getPetIds(), sched2.getPetIds());
         Assertions.assertEquals(sched1.getActivities(), sched2.getActivities());
         Assertions.assertEquals(sched1.getEmployeeIds(), sched2.getEmployeeIds());
-        Assertions.assertEquals(sched1.getDate(), sched2.getDate());
+        Assertions.assertEquals(sched1.getDeliveryTime(), sched2.getDeliveryTime());
     }
 
 }

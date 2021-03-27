@@ -17,4 +17,8 @@ public class CustomerService {
     }
 
     public List<Customer> getCustomers(){ return customerRepository.findAll();}
+
+    public Customer getCustomerById(Long customerId){
+        return customerRepository.findCustomerById(customerId);
+    }
 }

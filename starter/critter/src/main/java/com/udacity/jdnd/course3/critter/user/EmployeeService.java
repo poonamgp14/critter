@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.DayOfWeek;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -18,12 +19,16 @@ public class EmployeeService {
     }
 
 
-    public Employee getEmployeeById(long employeeId) {
+    public Employee getEmployeeById(Long employeeId) {
         return employeeRepository.findEmployeeById(employeeId);
     }
 
     public void setAvailability(Set<DayOfWeek> daysAvailable, Long employeeId){
         employeeRepository.getOne(employeeId).setDaysAvailable(daysAvailable);
     }
+
+    public List<Employee> getEmployeesForService(Set<EmployeeSkill> skills) { return employeeRepository.findEmployeesBySkillsIn(skills);}
+
+    public List<Employee> getEmployeesById(List<Long> employeeIds) { return employeeRepository.findByIdIn(employeeIds);}
 }
 

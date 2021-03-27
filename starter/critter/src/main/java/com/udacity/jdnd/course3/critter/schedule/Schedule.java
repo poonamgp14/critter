@@ -6,6 +6,7 @@ import com.udacity.jdnd.course3.critter.user.Employee;
 import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
@@ -22,7 +23,7 @@ public class Schedule {
     @ManyToMany
     private List<Pet> pets;
 
-    private LocalDateTime deliveryTime;
+    private LocalDate deliveryTime;
     @ElementCollection(targetClass = EmployeeSkill.class)
     @Enumerated(EnumType.STRING)
     @CollectionTable(
@@ -30,5 +31,20 @@ public class Schedule {
             joinColumns = @JoinColumn(name = "scheduleId")
     )
     @Column(name = "activity")
-    private final Set<EmployeeSkill> activities= new HashSet<>();
+    private Set<EmployeeSkill> activities= new HashSet<>();
+
+    public Long getId(){ return scheduleId;}
+    public void setId(Long id){ this.scheduleId = id;}
+
+    public List<Employee> getEmployees(){ return employees;}
+    public void setEmployees(List<Employee> employees){ this.employees = employees;}
+
+    public List<Pet> getPets(){ return pets;}
+    public void setPets(List<Pet> pets){ this.pets = pets;}
+
+    public LocalDate getDeliveryTime(){ return deliveryTime;}
+    public void setDeliveryTime(LocalDate time){ this.deliveryTime = time;}
+
+    public Set<EmployeeSkill> getActivities(){ return activities;}
+    public void setActivities(Set<EmployeeSkill> activities){ this.activities = activities;}
 }
