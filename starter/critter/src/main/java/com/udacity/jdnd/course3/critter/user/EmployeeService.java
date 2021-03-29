@@ -27,7 +27,7 @@ public class EmployeeService {
         employeeRepository.getOne(employeeId).setDaysAvailable(daysAvailable);
     }
 
-    public List<Employee> getEmployeesForService(Set<EmployeeSkill> skills) { return employeeRepository.findEmployeesBySkillsIn(skills);}
+    public List<Employee> getEmployeesForService(DayOfWeekGIT  daysAvailable, Set<EmployeeSkill> skills) { return employeeRepository.findEmployeesByDaysAvailableAndSkillsIn(daysAvailable, skills);}
 
     public List<Employee> getEmployeesById(List<Long> employeeIds) { return employeeRepository.findByIdIn(employeeIds);}
 }

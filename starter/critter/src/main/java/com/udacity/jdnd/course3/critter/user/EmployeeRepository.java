@@ -25,5 +25,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     List<Employee> findByIdIn(List<Long> employeeIds);
 
-    List<Employee> findEmployeesBySkillsIn(Set<EmployeeSkill> skills);
+    List<Employee> findEmployeesByDaysAvailableAndSkillsIn(DayOfWeek daysAvailable,Set<EmployeeSkill> skills);
 }
