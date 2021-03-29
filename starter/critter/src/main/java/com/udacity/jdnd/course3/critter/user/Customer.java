@@ -29,4 +29,6 @@ public class Customer extends User{
     public String getNotes(){return notes;}
 
     public void setNotes(String notes){ this.notes = notes;}
+    public void setPets(List<Pet> pets){ this.pets = pets;}
+    public List<Pet> getPets() { return pets;}
 }

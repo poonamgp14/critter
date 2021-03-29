@@ -56,6 +56,12 @@ public class ScheduleController {
     private ScheduleDTO convertScheduleToScheduleDTO(Schedule s) {
         ScheduleDTO scheduleDTO = new ScheduleDTO();
         BeanUtils.copyProperties(s, scheduleDTO);
+        List<Employee> es = s.getEmployees();
+        List<Pet> ps = s.getPets();
+        List<Long> eIds = es.stream().map(e -> e.getId()).collect(Collectors.toList());
+        List<Long> pIds = ps.stream().map(p -> p.getId()).collect(Collectors.toList());
+        scheduleDTO.setEmployeeIds(eIds);
+        scheduleDTO.setPetIds(pIds);
         return scheduleDTO;
     }
 
@@ -78,7 +84,6 @@ public class ScheduleController {
         Customer customer = customerService.getCustomerById(customerId);
         List<Pet> pets = petService.getPetsByCustomer(customer);
         List<Schedule> schedules = scheduleService.getSchedulesByPet(pets);
-        //List<Schedule> schedules = scheduleService.getScheduleByCustomer(customer);
         return schedules.stream().map(s -> convertScheduleToScheduleDTO(s)).collect(Collectors.toList());
     }
 }

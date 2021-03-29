@@ -30,7 +30,11 @@ public class PetController {
 
     @GetMapping("/{petId}")
     public PetDTO getPet(@PathVariable long petId) {
-        return convertPetToPetDTO(petService.getPetById(petId));
+        Pet pet = petService.getPetById(petId);
+        Long ownerId = pet.getCustomer().getId();
+        PetDTO dto = convertPetToPetDTO(pet);
+        dto.setOwnerId(ownerId);
+        return dto;
     }
 
     @GetMapping
@@ -43,7 +47,11 @@ public class PetController {
     public List<PetDTO> getPetsByOwner(@PathVariable long ownerId) {
         Customer owner = customerService.getCustomerById(ownerId);
         List<Pet> pets = petService.getPetsByCustomer(owner);
-        return pets.stream().map(p -> convertPetToPetDTO(p)).collect(Collectors.toList());
+        return pets.stream().map(p -> {
+            PetDTO dto = convertPetToPetDTO(p);
+            dto.setOwnerId(ownerId);
+            return dto;
+        }).collect(Collectors.toList());
     }
 
     private PetDTO convertPetToPetDTO(Pet p) {

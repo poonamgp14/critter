@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -31,6 +33,8 @@ import java.util.stream.IntStream;
  */
 @Transactional
 @SpringBootTest(classes = CritterApplication.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 public class CritterFunctionalTest {
 
     @Autowired
@@ -95,11 +99,14 @@ public class CritterFunctionalTest {
         PetDTO petDTO = createPetDTO();
         petDTO.setOwnerId(newCustomer.getId());
         PetDTO newPet = petController.savePet(petDTO);
-        petDTO.setType(PetType.DOG);
-        petDTO.setName("DogName");
-        PetDTO newPet2 = petController.savePet(petDTO);
+//        petDTO.setType(PetType.DOG);
+//        petDTO.setName("DogName");
+        PetDTO petDTO2 = createPetDTO();
+        petDTO2.setOwnerId(newCustomer.getId());
+        PetDTO newPet2 = petController.savePet(petDTO2);
 
         List<PetDTO> pets = petController.getPetsByOwner(newCustomer.getId());
+        System.out.println(pets);
         Assertions.assertEquals(pets.size(), 2);
         Assertions.assertEquals(pets.get(0).getOwnerId(), newCustomer.getId());
         Assertions.assertEquals(pets.get(0).getId(), newPet.getId());

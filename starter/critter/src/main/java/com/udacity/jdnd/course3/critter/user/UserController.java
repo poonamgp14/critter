@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.DayOfWeek;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -39,13 +40,20 @@ public class UserController {
     @GetMapping("/customer")
     public List<CustomerDTO> getAllCustomers(){
         List<Customer> customers = customerService.getCustomers();
-        return customers.stream().map(c -> convertCustomerToCustomerDTO(c)).collect(Collectors.toList());
+        return customers.stream().map(c ->{
+                CustomerDTO dto = convertCustomerToCustomerDTO(c);
+                dto.setPetIds(petService.getIdsByCustomer(c));
+                return dto;
+        }).collect(Collectors.toList());
     }
 
     @GetMapping("/customer/pet/{petId}")
-    public CustomerDTO getOwnerByPet(@PathVariable long petId){
+    public CustomerDTO getOwnerByPet(@PathVariable long petId) {
         Pet pet = petService.getPetById(petId);
-        return convertCustomerToCustomerDTO(pet.getCustomer());
+        CustomerDTO dto = convertCustomerToCustomerDTO(pet.getCustomer());
+        List<Long> petIds = Collections.singletonList(pet.getId());
+        dto.setPetIds(petIds);
+        return dto;
     }
 
     @PostMapping("/employee")
@@ -67,11 +75,8 @@ public class UserController {
 
     @GetMapping("/employee/availability")
     public List<EmployeeDTO> findEmployeesForService(@RequestBody EmployeeRequestDTO employeeDTO) {
-        System.out.println("___________________________________________________________");
         Set<EmployeeSkill> skills = employeeDTO.getSkills();
-        System.out.println(employeeDTO.getDate().getDayOfWeek());
         List<Employee> employees = employeeService.getEmployeesForService(employeeDTO.getDate().getDayOfWeek(),skills);
-        System.out.println(employees);
         return employees.stream().map(e -> convertEmployeeToEmployeeDTO(e)).collect(Collectors.toList());
     }
 

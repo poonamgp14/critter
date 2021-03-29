@@ -23,6 +23,8 @@ public class PetService {
 
     public List<Pet> getPetsByCustomer(Customer customer){ return petRepository.findPetsByCustomer(customer);}
 
+    public List<Long> getIdsByCustomer(Customer customer){ return petRepository.findIdsByCustomer(customer);}
+
     public List<Pet> getPetsById(List<Long> petIds) { return petRepository.findByIdIn(petIds);}
 }
 
